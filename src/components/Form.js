@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DropDown from './Date';
 
 class FormTemplate extends Component {
   constructor (props) {
@@ -28,10 +29,31 @@ class FormTemplate extends Component {
           <label htmlFor='about'>About You: </label>
           <textarea id="about"></textarea>
         </div>
-
+      <Education name="Educational History"/>
       </form>
     )
   }
+}
+
+class Education extends Component {
+  constructor (props) {
+    super (props)
+    this.state = {
+      school: ['Test']
+    }
+  }
+
+  render () {
+    return (
+      <div>{this.props.name}
+        <label htmlFor='school'>School Name: </label>
+        <input id='school' type='text' placeholder='University of Florida'></input>
+        <DropDown />
+      </div>
+
+    )
+  }
+  
 }
 
 export default FormTemplate;
