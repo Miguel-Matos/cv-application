@@ -4,7 +4,9 @@ class DropDown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      date: ''
+      year: 1993,
+      month: 1,
+      day: 1
     }
   }
 
@@ -30,6 +32,10 @@ class DropDown extends Component {
             <select>
                 {yearList}
             </select>
+
+
+
+            {`${this.state.year} ${this.state.month} ${this.state.day}`}
         </div>
     );
 }
