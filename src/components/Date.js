@@ -10,6 +10,8 @@ class DropDown extends Component {
       day: 1,
       id: uniqid()
     }
+
+    this.dateChange = this.dateChange.bind(this);
   }
 
   dateChange() {
@@ -23,7 +25,15 @@ class DropDown extends Component {
   render() {
     let thisYear = (new Date()).getFullYear();
     let allYears = [];
-    let allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const allDates = [
+      {month: 'January',
+        days: 31
+      },
+      {month: 'February',
+        days: 28
+      }
+    ]
     let allDays = [];
     for(let x = 0; x <= 50; x++) {
         allYears.push(thisYear - x)
