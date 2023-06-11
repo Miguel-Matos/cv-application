@@ -25,22 +25,60 @@ class DropDown extends Component {
   render() {
     let thisYear = (new Date()).getFullYear();
     let allYears = [];
-    const allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const allDates = [
       {month: 'January',
         days: 31
       },
       {month: 'February',
         days: 28
+      },
+      {
+        month: 'March',
+        days: 31
+      },
+      {
+        month: 'April',
+        days: 30
+      },
+      {
+        month: 'May',
+        days: 31
+      },
+      {
+        month: 'June',
+        days: 30
+      },
+      {
+        month: 'July',
+        days: 31
+      },
+      {
+        month: 'August',
+        days: 31
+      },
+      {
+        month: 'September',
+        days: 30
+      },
+      {
+        month: 'October',
+        days: 31
+      },
+      {
+        month: 'November',
+        days: 30
+      },
+      {
+        month: 'December',
+        days: 31
       }
     ]
-    let allDays = [];
     for(let x = 0; x <= 50; x++) {
         allYears.push(thisYear - x)
     }
 
     const yearList = allYears.map((x) => {return(<option key={this.state.id}>{x}</option>)});
-    const monthList = allMonths.map(month => <option key={this.state.id}>{month}</option>)
+    const monthList = allDates.map(month => <option key={this.state.id}>{month.month}</option>)
     return(
         <div>
             <select>
