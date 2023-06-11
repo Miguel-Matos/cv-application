@@ -6,85 +6,107 @@ class DropDown extends Component {
     super(props)
     this.state = {
       year: 1993,
-      month: 1,
-      day: 1,
+      month: 'January',
+      day: '',
+      dayLoop: 0,
       id: uniqid()
     }
 
-    this.dateChange = this.dateChange.bind(this);
+    this.yearChange = this.yearChange.bind(this);
+    this.monthChange = this.monthChange.bind(this);
   }
 
-  dateChange() {
-    this.setState = { 
-      year: 1993,
-      month: 1,
-      day: 1
+  thisYear = (new Date()).getFullYear();
+  allYears = [];
+  allDates = [
+    {month: 'January',
+      days: 31
+    },
+    {month: 'February',
+      days: 28
+    },
+    {
+      month: 'March',
+      days: 31
+    },
+    {
+      month: 'April',
+      days: 30
+    },
+    {
+      month: 'May',
+      days: 31
+    },
+    {
+      month: 'June',
+      days: 30
+    },
+    {
+      month: 'July',
+      days: 31
+    },
+    {
+      month: 'August',
+      days: 31
+    },
+    {
+      month: 'September',
+      days: 30
+    },
+    {
+      month: 'October',
+      days: 31
+    },
+    {
+      month: 'November',
+      days: 30
+    },
+    {
+      month: 'December',
+      days: 31
     }
+  ]
+
+  allDays = [];
+// Right now it is rendering the days of the previously selected month
+  dayMaker() {
+    this.allDays = [];
+    for(let x = 1; x <= this.state.dayLoop; x++) {
+      this.allDays.push(x)
+  }
+  }
+
+  yearChange(e) {
+    this.setState({ 
+      year: e.target.value
+    })
+  }
+
+  monthChange(e) {
+    const selectedMonth = e.target.value;
+    const selectedDate = this.allDates.find(date => date.month === selectedMonth);
+    if (selectedDate) {
+      this.setState({ 
+        month: selectedMonth,
+        dayLoop: selectedDate.days
+      });
+    }
+    this.dayMaker();
   }
 
   render() {
-    let thisYear = (new Date()).getFullYear();
-    let allYears = [];
-    const allDates = [
-      {month: 'January',
-        days: 31
-      },
-      {month: 'February',
-        days: 28
-      },
-      {
-        month: 'March',
-        days: 31
-      },
-      {
-        month: 'April',
-        days: 30
-      },
-      {
-        month: 'May',
-        days: 31
-      },
-      {
-        month: 'June',
-        days: 30
-      },
-      {
-        month: 'July',
-        days: 31
-      },
-      {
-        month: 'August',
-        days: 31
-      },
-      {
-        month: 'September',
-        days: 30
-      },
-      {
-        month: 'October',
-        days: 31
-      },
-      {
-        month: 'November',
-        days: 30
-      },
-      {
-        month: 'December',
-        days: 31
-      }
-    ]
     for(let x = 0; x <= 50; x++) {
-        allYears.push(thisYear - x)
+        this.allYears.push(this.thisYear - x)
     }
 
-    const yearList = allYears.map((x) => {return(<option key={this.state.id}>{x}</option>)});
-    const monthList = allDates.map(month => <option key={this.state.id}>{month.month}</option>)
+    const yearList = this.allYears.map((x) => {return(<option key={this.state.id}>{x}</option>)});
+    const monthList = this.allDates.map(month => <option key={this.state.id}>{month.month}</option>);
+    const dayList = this.allDays.map(day => <option key={this.state.id}>{day}</option>);
     return(
         <div>
-            <select>
-                {yearList}
-            </select>
-            <select>{monthList}</select>
+            <select onChange={this.yearChange}>{yearList}</select>
+            <select onChange={this.monthChange}>{monthList}</select>
+            <select onChange={this.monthChange}>{dayList}</select>
 
 
             {`${this.state.year} ${this.state.month} ${this.state.day}`}
