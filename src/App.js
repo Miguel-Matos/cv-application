@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header name="Resume Generator"/>
+        <Header name="Easy Resumes"/>
         <FormTemplate />
       </div>
     );
