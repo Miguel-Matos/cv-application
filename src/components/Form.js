@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import History from './History';
 import Info from './Info';
+import HisGen from './HisGen';
 
 class FormTemplate extends Component {
   constructor (props) {
@@ -12,7 +13,7 @@ class FormTemplate extends Component {
       <form>
         <Info />
         <h3>Educational History</h3>
-      <History location='School'/>
+      <HisGen />
       </form>
     )
   }
