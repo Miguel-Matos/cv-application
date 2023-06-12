@@ -7,8 +7,8 @@ class DropDown extends Component {
     this.state = {
       year: 1993,
       month: 'January',
-      day: '',
-      dayLoop: 0,
+      day: 31,
+      dayLoop: 31,
       id: uniqid()
     }
 
@@ -90,14 +90,17 @@ class DropDown extends Component {
         month: selectedMonth,
         dayLoop: selectedDate.days
       });
+      this.dayMaker();
     }
-    this.dayMaker();
+    
   }
 
   render() {
     for(let x = 0; x <= 50; x++) {
         this.allYears.push(this.thisYear - x)
     }
+
+    this.dayMaker()
 
     const yearList = this.allYears.map((x) => {return(<option key={this.state.id}>{x}</option>)});
     const monthList = this.allDates.map(month => <option key={this.state.id}>{month.month}</option>);
