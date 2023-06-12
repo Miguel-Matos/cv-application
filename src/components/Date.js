@@ -14,6 +14,7 @@ class DropDown extends Component {
 
     this.yearChange = this.yearChange.bind(this);
     this.monthChange = this.monthChange.bind(this);
+    this.dayChange = this.dayChange.bind(this);
   }
 
   thisYear = (new Date()).getFullYear();
@@ -92,7 +93,12 @@ class DropDown extends Component {
       });
       this.dayMaker();
     }
-    
+  }
+
+  dayChange(e) {
+    this.setState({ 
+      day: e.target.value
+    })
   }
 
   render() {
@@ -109,10 +115,7 @@ class DropDown extends Component {
         <div>
             <select onChange={this.yearChange}>{yearList}</select>
             <select onChange={this.monthChange}>{monthList}</select>
-            <select onChange={this.monthChange}>{dayList}</select>
-
-
-            {`${this.state.year} ${this.state.month} ${this.state.day}`}
+            <select onChange={this.dayChange}>{dayList}</select>
         </div>
     );
 }
