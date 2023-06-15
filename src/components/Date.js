@@ -78,9 +78,12 @@ class DropDown extends Component {
   }
 
   yearChange(e) {
+    const selectedYear = e.target.value;
     this.setState({ 
-      year: e.target.value
-    })
+      year: selectedYear
+    }, () => {
+      this.props.onSelectDate(this.state.year);
+    });
   }
 
   monthChange(e) {
@@ -93,6 +96,8 @@ class DropDown extends Component {
       });
       this.dayMaker();
     }
+
+
   }
 
   dayChange(e) {
@@ -108,14 +113,15 @@ class DropDown extends Component {
 
     this.dayMaker()
 
-    const yearList = this.allYears.map((x) => {return(<option key={this.state.id}>{x}</option>)});
-    const monthList = this.allDates.map(month => <option key={this.state.id}>{month.month}</option>);
-    const dayList = this.allDays.map(day => <option key={this.state.id}>{day}</option>);
+    const yearList = this.allYears.map((x) => {return(<option key={x}>{x}</option>)});
+    const monthList = this.allDates.map(month => <option key={month.month}>{month.month}</option>);
+    // const dayList = this.allDays.map(day => <option key={this.state.id}>{day}</option>);
     return(
         <div>
-            <select onChange={this.yearChange}>{yearList}</select>
             <select onChange={this.monthChange}>{monthList}</select>
-            <select onChange={this.dayChange}>{dayList}</select>
+            <select onChange={this.yearChange}>{yearList}</select>
+
+            {/* <select onChange={this.dayChange}>{dayList}</select> */}
         </div>
     );
 }
