@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import History from './History';
+import Btn from './Button';
 
 // class HisGen extends Component {
 //   constructor(props) {
@@ -31,9 +32,14 @@ class HisGen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hisArr: [{ id: 1, title: 'History 1' }]
+      hisArr: [{ id: 1, title: 'History 1' }],
+      edit: false,
+      hidden: true,
+      button: 'Done'
     };
     this.addHistory = this.addHistory.bind(this);
+    this.updateButton = this.updateButton.bind(this);
+
   }
 
   addHistory() {
@@ -47,13 +53,25 @@ class HisGen extends Component {
     });
   }
 
+  updateButton() {
+    this.setState({
+      hidden: !this.state.hidden,
+      edit: !this.state.edit
+    })
+  }
+
   render() {
     return (
       <div>
-        {this.state.hisArr.map(history => (
-          <History key={history.id} title={history.title} />
-        ))}
-        <button onClick={this.addHistory}>New</button>
+        <div hidden={this.state.edit}>
+          {this.state.hisArr.map(history => (
+            <History key={history.id} title={history.title} />
+          ))}
+        </div>
+
+        <button hidden={this.state.edit} onClick={this.addHistory}>New</button>
+        <Btn updateEdit={this.updateButton} updateHidden={this.updateButton}/>
+
       </div>
     );
   }

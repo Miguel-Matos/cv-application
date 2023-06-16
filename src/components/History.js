@@ -53,6 +53,7 @@ class History extends Component {
         <input onChange={this.current} id='current' type='checkbox'/><label htmlFor='current'> Current</label>
 
         <p>{this.state.location} {this.state.from}</p>
+        
         {this.state.current === true ? <p>Current</p> : <p>{this.state.to}</p>}
       </div>
 
