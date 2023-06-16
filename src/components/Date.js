@@ -5,15 +5,17 @@ class DropDown extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      year: 1993,
+      year: 2023,
       month: 'January',
       day: 31,
-      dayLoop: 31
+      dayLoop: 31,
+      disabled: false
     }
 
     this.yearChange = this.yearChange.bind(this);
     this.monthChange = this.monthChange.bind(this);
-    this.dayChange = this.dayChange.bind(this);
+    // this.dayChange = this.dayChange.bind(this);
+
   }
 
   thisYear = (new Date()).getFullYear();
@@ -68,7 +70,6 @@ class DropDown extends Component {
   ]
 
   allDays = [];
-// Right now it is rendering the days of the previously selected month
   dayMaker() {
     this.allDays = [];
     for(let x = 1; x <= this.state.dayLoop; x++) {
@@ -81,7 +82,7 @@ class DropDown extends Component {
     this.setState({ 
       year: selectedYear
     }, () => {
-      this.props.onSelectDate(this.state.year);
+      this.props.onSelectDate(`${this.state.month},  ${this.state.year}`);
     });
   }
 
@@ -92,6 +93,8 @@ class DropDown extends Component {
       this.setState({ 
         month: selectedMonth,
         dayLoop: selectedDate.days
+      }, () => {
+        this.props.onSelectDate(`${this.state.month},  ${this.state.year}`);
       });
       this.dayMaker();
     }
@@ -99,11 +102,12 @@ class DropDown extends Component {
 
   }
 
-  dayChange(e) {
-    this.setState({ 
-      day: e.target.value
-    })
-  }
+
+  // dayChange(e) {
+  //   this.setState({ 
+  //     day: e.target.value
+  //   })
+  // }
 
   render() {
     for(let x = 0; x <= 50; x++) {
@@ -117,8 +121,8 @@ class DropDown extends Component {
     // const dayList = this.allDays.map(day => <option key={this.state.id}>{day}</option>);
     return(
         <div>
-            <select onChange={this.monthChange}>{monthList}</select>
-            <select onChange={this.yearChange}>{yearList}</select>
+            <select value={this.state.month} onChange={this.monthChange} disabled={this.props.disabled}>{monthList}</select>
+            <select value={this.state.year} onChange={this.yearChange} disabled={this.props.disabled}>{yearList}</select>
 
             {/* <select onChange={this.dayChange}>{dayList}</select> */}
         </div>

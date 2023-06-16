@@ -7,11 +7,13 @@ class History extends Component {
     this.state = {
       location: '',
       from: '',
-      to: ''
+      to: '',
+      current: false
     }
     this.setLocation = this.setLocation.bind(this);
     this.setFrom = this.setFrom.bind(this);
     this.setTo = this.setTo.bind(this);
+    this.current = this.current.bind(this);
   }
 
   setLocation(e) {
@@ -28,7 +30,15 @@ class History extends Component {
 
   setTo(e) {
     this.setState({
-      to: e.target.value
+      to: e
+    })
+  }
+
+  current() {
+    this.setState({
+      current: !this.state.current
+    }, () => {
+      console.log(this.state.current)
     })
   }
 
@@ -38,8 +48,9 @@ class History extends Component {
         <label htmlFor='location'>{this.props.location} Name: </label>
         <input onChange={this.setLocation} id='location' type='text' placeholder='University of Florida'></input>
         <DropDown onSelectDate={this.setFrom} />
-        <DropDown onChange={this.setTo} />
-        <input id='current' type='checkbox'/><label htmlFor='current'>Current</label>
+        <p>-</p>
+        <DropDown disabled={this.state.current} onSelectDate={this.setTo} />
+        <input onChange={this.current} id='current' type='checkbox'/><label htmlFor='current'>Current</label>
 
         <p>{this.state.location} {this.state.from} {this.state.to}</p>
       </div>
