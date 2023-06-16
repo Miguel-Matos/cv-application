@@ -50,9 +50,10 @@ class History extends Component {
         <DropDown onSelectDate={this.setFrom} />
         <p>-</p>
         <DropDown disabled={this.state.current} onSelectDate={this.setTo} />
-        <input onChange={this.current} id='current' type='checkbox'/><label htmlFor='current'>Current</label>
+        <input onChange={this.current} id='current' type='checkbox'/><label htmlFor='current'> Current</label>
 
-        <p>{this.state.location} {this.state.from} {this.state.to}</p>
+        <p>{this.state.location} {this.state.from}</p>
+        {this.state.current === true ? <p>Current</p> : <p>{this.state.to}</p>}
       </div>
 
     )
