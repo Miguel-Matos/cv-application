@@ -57,6 +57,16 @@ class Info extends Component {
       hidden: !this.state.hidden,
       edit: !this.state.edit
     })
+
+    if (this.state.button === 'Done') {
+      this.setState({
+        button: 'Edit'
+      })
+    } else {
+      this.setState({
+        button: 'Done'
+      })
+    }
   }
 
   render () {
