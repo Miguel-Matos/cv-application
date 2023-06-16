@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Btn from './Button';
 
 class Info extends Component {
   constructor(props) {
@@ -10,8 +11,8 @@ class Info extends Component {
       email: '',
       bio: '',
       edit: false,
-      hidden: true,
-      button: 'Done'
+      hidden: true
+
     }
     this.updateFName = this.updateFName.bind(this);
     this.updateLName = this.updateLName.bind(this);
@@ -51,22 +52,11 @@ class Info extends Component {
     })
   }
 
-  updateButton(e) {
-    e.preventDefault()
+  updateButton() {
     this.setState({
       hidden: !this.state.hidden,
       edit: !this.state.edit
     })
-
-    if (this.state.button === 'Done') {
-      this.setState({
-        button: 'Edit'
-      })
-    } else {
-      this.setState({
-        button: 'Done'
-      })
-    }
   }
 
   render () {
@@ -101,8 +91,7 @@ class Info extends Component {
           <h4>{this.state.email}</h4>
           <p>{this.state.bio}</p>
         </div>
-
-        <button onClick={this.updateButton}>{this.state.button}</button>
+        <Btn updateEdit={this.updateButton} updateHidden={this.updateButton}/>
         <hr></hr>
       </div>
     )
