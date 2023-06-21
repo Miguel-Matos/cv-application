@@ -14,6 +14,7 @@ class History extends Component {
     this.setFrom = this.setFrom.bind(this);
     this.setTo = this.setTo.bind(this);
     this.current = this.current.bind(this);
+    this.passUp = this.passUp.bind(this);
   }
 
   setLocation(e) {
@@ -31,7 +32,12 @@ class History extends Component {
   setTo(e) {
     this.setState({
       to: e
-    })
+    }
+    , () => {
+      console.log(this.state)
+      // this.props.onEdit([this.state.location, this.state.from, this.state.to])
+    }
+    )
   }
 
   current() {
@@ -40,6 +46,10 @@ class History extends Component {
     }, () => {
       console.log(this.state.current)
     })
+  }
+
+  passUp() {
+    return this.props.onEdit([this.state.location, this.state.from, this.state.to])
   }
 
   render () {
@@ -51,10 +61,10 @@ class History extends Component {
         <p>-</p>
         <DropDown disabled={this.state.current} onSelectDate={this.setTo} />
         <input onChange={this.current} id='current' type='checkbox'/><label htmlFor='current'> Current</label>
-
-        <p>{this.state.location} {this.state.from}</p>
+        <button onClick={this.passUp}>Finished</button>
+        {/* <p>{this.state.location} {this.state.from}</p>
         
-        {this.state.current === true ? <p>Current</p> : <p>{this.state.to}</p>}
+        {this.state.current === true ? <p>Current</p> : <p>{this.state.to}</p>} */}
       </div>
 
     )
